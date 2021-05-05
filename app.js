@@ -8,7 +8,6 @@ const port = 3000;
 app.use(express.static(__dirname + '/'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// for parsing multipart/form-data
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {

@@ -1,10 +1,11 @@
 const form = document.querySelector('#form');
 const fInput = document.getElementById('fileInput');
 const ul = document.querySelector('ul');
+let fList = undefined;
 
 fInput.addEventListener('change', (e) => {
     ul.innerHTML = '';
-    const fList = Array.from(e.target.files);
+    fList = Array.from(e.target.files);
 
     fList.forEach((f, index) => {
         let li = ul.appendChild(document.createElement('li'));
@@ -14,6 +15,7 @@ fInput.addEventListener('change', (e) => {
         let p = li.appendChild(document.createElement('p'));
         let btn = li.appendChild(document.createElement('button'));
         btn.innerText = 'Delete';
+        btn.classList.add('btn');
 
         btn.addEventListener('click', () => {
             fList.splice(index, 1);
@@ -24,12 +26,12 @@ fInput.addEventListener('change', (e) => {
         });
         p.innerText = f.name;
     });
-    //fInput.value = null;
+    fInput.value = null;
 });
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const files = fInput.files;
+    const files = fList;
     const formData = new FormData();
     for (let i = 0; i < files.length; i++) {
         formData.append('files', files[i])
